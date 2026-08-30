@@ -1,0 +1,136 @@
+/*
+ * This program sorts 50 randomly generated numbers
+ * using merge sort and prints the sorted numbers.
+ */
+
+int kNext;
+
+int mod(int mod_x, int mod_y)
+{
+    return mod_x - mod_y * (mod_x / mod_y);
+}
+
+int srand32(int srand32_seed)
+{
+    kNext = srand32_seed;
+    return 0;
+}
+
+int rand32()
+{
+    int rand32_result;
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = mod(kNext / 65536, 2048);
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = rand32_result * 1024;
+    rand32_result = rand32_result + mod(kNext / 65536, 1024);
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = rand32_result * 1024;
+    rand32_result = rand32_result + mod(kNext / 65536, 1024);
+
+    return rand32_result;
+}
+
+int merge(int merge_data[50], int merge_low, int merge_mid, int merge_high)
+{
+    int merge_t[51];
+    int merge_t_cur = 0;
+    int merge_l_cur = merge_low, merge_r_cur = merge_mid + 1;
+    int merge_l_max = merge_mid, merge_r_max = merge_high;
+    int merge_i;
+
+    while (merge_l_cur <= merge_l_max && merge_r_cur <= merge_r_max)
+    {
+        if (merge_data[merge_l_cur] < merge_data[merge_r_cur])
+        {
+            merge_t[merge_t_cur] = merge_data[merge_l_cur];
+            merge_t_cur = merge_t_cur + 1;
+            merge_l_cur = merge_l_cur + 1;
+        }
+        else
+        {
+            merge_t[merge_t_cur] = merge_data[merge_r_cur];
+            merge_t_cur = merge_t_cur + 1;
+            merge_r_cur = merge_r_cur + 1;
+        }
+    }
+
+    while (merge_l_cur <= merge_l_max)
+    {
+        merge_t[merge_t_cur] = merge_data[merge_l_cur];
+        merge_t_cur = merge_t_cur + 1;
+        merge_l_cur = merge_l_cur + 1;
+    }
+
+    while (merge_r_cur <= merge_r_max)
+    {
+        merge_t[merge_t_cur] = merge_data[merge_r_cur];
+        merge_t_cur = merge_t_cur + 1;
+        merge_r_cur = merge_r_cur + 1;
+    }
+
+    merge_i = merge_low;
+
+    while (merge_i <= merge_high)
+    {
+        merge_data[merge_i] = merge_t[merge_i - merge_low];
+        merge_i = merge_i + 1;
+    }
+
+    return 0;
+}
+
+int mergesort(int mergesort_data[50], int mergesort_low, int mergesort_high)
+{
+    int mergesort_mid;
+
+    if (mergesort_low >= mergesort_high)
+    {
+        return 0;
+    }
+
+    mergesort_mid = (mergesort_low + mergesort_high) / 2;
+
+    mergesort(mergesort_data, mergesort_low, mergesort_mid);
+    mergesort(mergesort_data, mergesort_mid + 1, mergesort_high);
+
+    merge(mergesort_data, mergesort_low, mergesort_mid, mergesort_high);
+
+    return 0;
+}
+
+int main()
+{
+    int n = 50;
+    int data[50];
+    int i = 0;
+
+    // Take advantage of Virtual Machine's randomized stack to provide
+    // random seed. In C this is undefined behaviour and DON'T DO THIS.
+    int seed[1];
+    srand32(seed[0]);
+
+    while (i < n)
+    {
+        data[i] = rand32();
+        i = i + 1;
+    }
+
+    mergesort(data, 0, n - 1);
+
+    i = 0;
+
+    while (i < n)
+    {
+        write(data[i]);
+        i = i + 1;
+    }
+
+    return 0;
+}

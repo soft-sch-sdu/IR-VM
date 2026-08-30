@@ -1,0 +1,17 @@
+@import "../../../../../styles/common.module.scss";
+
+.divVariableTableWrapper {
+    width: 100%;
+    text-align: center;
+    
+    > div[class="emptyHolder"] {
+        font-size: 15px;
+        user-select: none;
+    }
+}
+
+.divValues{
+    @include slim-scroll-bar;
+    max-height: 300px;
+    overflow-y: auto;
+}

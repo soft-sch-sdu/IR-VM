@@ -1,0 +1,87 @@
+/*
+ * This program sorts 50 randomly generated numbers
+ * using insert sort and prints the sorted numbers.
+ */
+
+int kNext;
+
+int mod(int mod_x, int mod_y)
+{
+    return mod_x - mod_y * (mod_x / mod_y);
+}
+
+int srand32(int srand32_seed)
+{
+    kNext = srand32_seed;
+    return 0;
+}
+
+int rand32()
+{
+    int rand32_result;
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = mod(kNext / 65536, 2048);
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = rand32_result * 1024;
+    rand32_result = rand32_result + mod(kNext / 65536, 1024);
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = rand32_result * 1024;
+    rand32_result = rand32_result + mod(kNext / 65536, 1024);
+
+    return rand32_result;
+}
+
+int insertsort(int sort_data[50], int sort_n)
+{
+    int sort_i = 1;
+    while (sort_i < sort_n)
+    {
+        int sort_cur = sort_data[sort_i];
+        int sort_j = sort_i - 1;
+        while (sort_j >= 0 && sort_data[sort_j] > sort_cur)
+        {
+            sort_data[sort_j + 1] = sort_data[sort_j];
+            sort_j = sort_j - 1;
+        }
+        sort_data[sort_j + 1] = sort_cur;
+        sort_i = sort_i + 1;
+    }
+
+    return 0;
+}
+
+int main()
+{
+    int n = 50;
+    int data[50];
+    int i = 0;
+
+    // Take advantage of Virtual Machine's randomized stack to provide
+    // random seed. In C this is undefined behaviour and DON'T DO THIS.
+    int seed[1];
+    srand32(seed[0]);
+
+    while (i < n)
+    {
+        data[i] = rand32();
+        i = i + 1;
+    }
+
+    insertsort(data, n);
+
+    i = 0;
+
+    while (i < n)
+    {
+        write(data[i]);
+        i = i + 1;
+    }
+
+    return 0;
+}

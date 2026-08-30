@@ -1,0 +1,40 @@
+.divOutputBlocksWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.divOutputBlockWrapper {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+}
+
+.spanError {
+    color: var(--vm-console-error-color);
+}
+
+.spanWarning {
+    color: var(--vm-console-warning-color);
+}
+
+.spanSuccess {
+    color: var(--vm-console-success-color);
+}
+
+.spanInput {
+    color: var(--vm-console-input-color);
+}
+
+.spanOutput {
+    color: var(--vm-console-output-color);
+}
+
+.spanPrompt {
+    color: var(--vm-console-prompt-color);
+}
+
+.spanArrow {
+    color: var(--vm-console-arrow-color);
+}

@@ -1,0 +1,28 @@
+@import "../../../../../styles/layout.module.scss";
+
+.divInputBlockWrapper {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+}
+
+.spanArrow {
+    color: var(--vm-console-arrow-color);
+}
+
+.spanPrompt {
+    white-space: pre;
+    color: var(--vm-console-prompt-color);
+}
+
+.in {
+    flex-grow: 1;
+    // With flex-grow only the input stays too wide
+    min-width: 80px;
+    height: $vm-console-line-height;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    color: var(--vm-console-normal-color);
+    background-color: transparent;
+}

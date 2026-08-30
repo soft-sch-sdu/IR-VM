@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+# dist
+# dist-ssr
+*.local
+.VSCodeCounter
+
+# Editor directories and files
+.vs/*
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+cli/tsc_out
+
+public/demos/cc.exe
+public/demos/all.py
+
+docs/demos/cc.exe
+docs/demos/all.py
+
+dist_netlify

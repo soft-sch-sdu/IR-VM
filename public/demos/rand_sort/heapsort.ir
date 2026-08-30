@@ -1,0 +1,249 @@
+GLOBAL_DEC var0 4
+FUNCTION mod :
+PARAM var1
+PARAM var2
+var3 := var1 / var2
+var4 := var2 * var3
+var5 := var1 - var4
+RETURN var5
+FUNCTION srand32 :
+PARAM var6
+var0 := var6
+RETURN #0
+FUNCTION rand32 :
+var8 := var0 * #1103515245
+var0 := var8
+var9 := var0 + #12345
+var0 := var9
+var10 := var0 / #65536
+ARG #2048
+ARG var10
+var11 := CALL mod
+var7 := var11
+var12 := var0 * #1103515245
+var0 := var12
+var13 := var0 + #12345
+var0 := var13
+var14 := var7 * #1024
+var7 := var14
+var15 := var0 / #65536
+ARG #1024
+ARG var15
+var16 := CALL mod
+var17 := var7 + var16
+var7 := var17
+var18 := var0 * #1103515245
+var0 := var18
+var19 := var0 + #12345
+var0 := var19
+var20 := var7 * #1024
+var7 := var20
+var21 := var0 / #65536
+ARG #1024
+ARG var21
+var22 := CALL mod
+var23 := var7 + var22
+var7 := var23
+RETURN var7
+FUNCTION buildheap :
+PARAM var24
+PARAM var25
+PARAM var26
+var28 := #4 * var25
+var29 := var24 + var28
+var27 := *var29
+var31 := #2 * var25
+var30 := var31 + #1
+var32 := #0
+LABEL label22 :
+IF var30 < var26 GOTO label0
+var33 := #0
+GOTO label1
+LABEL label0 :
+var33 := #1
+LABEL label1 :
+IF var32 != #0 GOTO label2
+var34 := #1
+GOTO label3
+LABEL label2 :
+var34 := #0
+LABEL label3 :
+IF var33 != #0 GOTO label5
+LABEL label6 :
+var35 := #0
+GOTO label7
+LABEL label5 :
+IF var34 != #0 GOTO label4
+GOTO label6
+LABEL label4 :
+var35 := #1
+LABEL label7 :
+IF var35 != #0 GOTO label23
+GOTO label24
+LABEL label23 :
+var36 := var30 + #1
+IF var36 < var26 GOTO label8
+var37 := #0
+GOTO label9
+LABEL label8 :
+var37 := #1
+LABEL label9 :
+var38 := var30 + #1
+var39 := #4 * var38
+var40 := var24 + var39
+var41 := #4 * var30
+var42 := var24 + var41
+IF *var40 > *var42 GOTO label10
+var43 := #0
+GOTO label11
+LABEL label10 :
+var43 := #1
+LABEL label11 :
+IF var37 != #0 GOTO label13
+LABEL label14 :
+var44 := #0
+GOTO label15
+LABEL label13 :
+IF var43 != #0 GOTO label12
+GOTO label14
+LABEL label12 :
+var44 := #1
+LABEL label15 :
+IF var44 != #0 GOTO label16
+GOTO label17
+LABEL label16 :
+var45 := var30 + #1
+var30 := var45
+LABEL label17 :
+var46 := #4 * var30
+var47 := var24 + var46
+IF var27 < *var47 GOTO label18
+var48 := #0
+GOTO label19
+LABEL label18 :
+var48 := #1
+LABEL label19 :
+IF var48 != #0 GOTO label20
+var32 := #1
+GOTO label21
+LABEL label20 :
+var49 := #4 * var25
+var50 := var24 + var49
+var51 := #4 * var30
+var52 := var24 + var51
+*var50 := *var52
+var25 := var30
+LABEL label21 :
+var53 := #2 * var30
+var54 := var53 + #1
+var30 := var54
+GOTO label22
+LABEL label24 :
+var55 := #4 * var25
+var56 := var24 + var55
+*var56 := var27
+RETURN #0
+FUNCTION heapsort :
+PARAM var57
+PARAM var58
+var60 := var58 / #2
+var59 := var60 - #1
+LABEL label27 :
+IF var59 >= #0 GOTO label25
+var62 := #0
+GOTO label26
+LABEL label25 :
+var62 := #1
+LABEL label26 :
+IF var62 != #0 GOTO label28
+GOTO label29
+LABEL label28 :
+ARG var58
+ARG var59
+ARG var57
+CALL buildheap
+var63 := var59 - #1
+var59 := var63
+GOTO label27
+LABEL label29 :
+var64 := var58 - #1
+var59 := var64
+LABEL label32 :
+IF var59 > #0 GOTO label30
+var65 := #0
+GOTO label31
+LABEL label30 :
+var65 := #1
+LABEL label31 :
+IF var65 != #0 GOTO label33
+GOTO label34
+LABEL label33 :
+var66 := #4 * #0
+var67 := var57 + var66
+var61 := *var67
+var68 := #4 * #0
+var69 := var57 + var68
+var70 := #4 * var59
+var71 := var57 + var70
+*var69 := *var71
+var72 := #4 * var59
+var73 := var57 + var72
+*var73 := var61
+ARG var59
+ARG #0
+ARG var57
+CALL buildheap
+var74 := var59 - #1
+var59 := var74
+GOTO label32
+LABEL label34 :
+RETURN #0
+FUNCTION main :
+var75 := #50
+DEC var76 200
+var77 := #0
+DEC var78 4
+var79 := #4 * #0
+var80 := &var78 + var79
+ARG *var80
+CALL srand32
+LABEL label37 :
+IF var77 < var75 GOTO label35
+var81 := #0
+GOTO label36
+LABEL label35 :
+var81 := #1
+LABEL label36 :
+IF var81 != #0 GOTO label38
+GOTO label39
+LABEL label38 :
+var82 := #4 * var77
+var83 := &var76 + var82
+var84 := CALL rand32
+*var83 := var84
+var85 := var77 + #1
+var77 := var85
+GOTO label37
+LABEL label39 :
+ARG var75
+ARG &var76
+CALL heapsort
+var77 := #0
+LABEL label42 :
+IF var77 < var75 GOTO label40
+var86 := #0
+GOTO label41
+LABEL label40 :
+var86 := #1
+LABEL label41 :
+IF var86 != #0 GOTO label43
+GOTO label44
+LABEL label43 :
+var87 := #4 * var77
+var88 := &var76 + var87
+WRITE *var88
+var89 := var77 + #1
+var77 := var89
+GOTO label42
+LABEL label44 :
+RETURN #0

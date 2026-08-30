@@ -1,0 +1,63 @@
+.themeLight {
+    --sidebar-bkg-color: rgb(44, 44, 44);
+    --sidebar-icon-color: rgba(255, 255, 255, 0.5);
+    --sidebar-icon-hover-color: rgba(255, 255, 255, 0.9);
+
+    --demo-item-avatar-color: rgb(66, 160, 255);
+    --demo-item-hover-color: rgba(0, 0, 0, 0.05);
+
+    --tabbar-bkg-color: rgb(243, 243, 243);
+    --tabbar-item-inactive-bkg-color: rgb(236, 236, 236);
+    --tabbar-item-inactive-hover-bkg-color: rgb(245, 245, 245);
+    --tabbar-item-active-bkg-color: rgb(255, 255, 255);
+    --tabbar-item-icon-color: rgba(0, 0, 0, 0.5);
+    --tabbar-item-text-color: rgb(0, 0, 0);
+    --tabbar-item-rename-border-color: rgb(176, 176, 176);
+    --tabbar-item-close-color: rgba(0, 0, 0, 0.7);
+    --tabbar-close-hover-bkg-color: rgba(0, 0, 0, 0.1);
+
+    --vm-wrapper-bkg-color: #fff;
+    --vm-empty-holder-desc-color: rgba(0, 0, 0, 0.3);
+    --vm-empty-holder-hint-color: rgba(0, 0, 0, 0.4);
+    --vm-section-border-color: #e7e7e7;
+
+    --ir-editor-error-range-bkg-color: rgb(255, 199, 199);
+    --ir-editor-current-line-range-bkg-color: rgba(173, 216, 230, 0.5);
+
+    --vm-console-bkg-color: #fff;
+    --vm-console-error-color: rgb(203, 36, 49);
+    --vm-console-warning-color: rgb(227, 170, 25);
+    --vm-console-success-color: rgb(28, 121, 49);
+    --vm-console-input-color: rgb(31, 31, 32);
+    --vm-console-output-color: rgb(31, 31, 32);
+    --vm-console-prompt-color: rgb(148, 154, 161);
+    --vm-console-arrow-color: rgb(0, 120, 212);
+
+    --vm-console-inspector-box-shadow-color: #dddddd;
+
+    --control-panel-label-color: rgb(71, 75, 80);
+    --control-panel-run-icon-color: rgb(123, 195, 121);
+    --control-panel-step-icon-color: rgb(123, 195, 121);
+    --control-panel-reset-icon-color: rgb(90, 136, 215);
+    --control-panel-clear-icon-color: rgb(118, 121, 126);
+    --control-panel-icon-hover-bkg-color: rgba(0, 0, 0, 0.05);
+    --control-panel-icon-active-bkg-color: rgba(0, 0, 0, 0.09);
+
+    --vm-inspector-bkg-color: #fff;
+    --vm-inspector-step-state-label-color: #414141;
+    --vm-inspector-step-count-color: #9b0000;
+    --vm-inspector-state-initial-color: #0059de;
+    --vm-inspector-state-busy-color: #a32b00;
+    --vm-inspector-state-wait-input-color: #f2ba00;
+    --vm-inspector-state-free-color: #00c3ff;
+    --vm-inspector-state-static-check-failed-color: #ff0000;
+    --vm-inspector-state-runtime-error-color: #ff0000;
+    --vm-inspector-state-max-step-reached-color: #3c00ff;
+    --vm-inspector-state-exited-normally-color: #24a600;
+    --vm-inspector-state-exited-abnormally-color: #ff8000;
+    --vm-inspector-card-border-color: #f0f0f0;
+    --vm-inspector-card-bkg-color: transparent;
+    --vm-inspector-text-color: #000000;
+    --vm-inspector-option-info-icon-color: #666;
+    --vm-inspector-option-info-icon-hover-color: #333;
+}

@@ -1,0 +1,100 @@
+@import "../../../../styles/layout.module.scss";
+
+.asideSideBarWrapper {
+    width: $sidebar-width;
+    height: 100%;
+
+    background-color: var(--sidebar-bkg-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    user-select: none;
+}
+
+.divIconWrapperBase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divIconWrapperUpper {
+    @extend .divIconWrapperBase;
+    padding-top: 20px;
+}
+
+.divIconWrapperLower {
+    @extend .divIconWrapperBase;
+    padding-bottom: 20px;
+}
+
+.articleAbout {
+    text-align: center;
+    font-size: 14px;
+
+    p {
+        margin-bottom: 0.7em;
+    }
+
+    > p[class="title"] {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    > p[class="info"] {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
+
+.aDemoSources {
+    margin-left: 1em;
+}
+
+.menuDemos {
+    max-height: 70vh;
+    overflow-y: auto;
+
+    span[class~="ant-menu-title-content"] {
+        font-weight: bold;
+    }
+
+    ul[class~="ant-menu"] {
+        background-color: #fff !important;
+
+        li[class~="ant-menu-item"] {
+            height: fit-content;
+            margin: 0 !important;
+            padding: 0 0 0 30px !important;
+            border-radius: 0;
+
+            &:hover {
+                background-color: #fff !important;
+            }
+
+            [class~="ant-avatar"] {
+                background-color: var(--demo-item-avatar-color);
+            }
+
+            li[class~="ant-list-item"] {
+                transition-duration: 200ms;
+                &:hover {
+                    background-color: var(--demo-item-hover-color);
+                }
+
+                [class~="ant-list-item-meta-title"] {
+                    text-wrap: wrap;
+                    font-weight: normal;
+                }
+
+                [class~="ant-list-item-meta-description"] {
+                    text-wrap: wrap;
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+}

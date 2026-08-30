@@ -1,0 +1,14 @@
+@import "../../../../styles/layout.module.scss";
+@import "../../../../styles/common.module.scss";
+
+.navTabBarWrapper {
+    background-color: var(--tabbar-bkg-color);
+    height: $tabbar-height;
+    width: 100%;
+    overflow-x: auto;
+    @include slim-scroll-bar;
+
+    display: flex;
+
+    user-select: none;
+}

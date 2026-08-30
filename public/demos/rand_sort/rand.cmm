@@ -1,0 +1,58 @@
+/*
+ * This program implements an extremely simple LCG.
+ * It reads the number of random numbers to generate,
+ * then writes the generated random numbers to console.
+ */
+
+int kNext;
+
+int mod(int mod_x, int mod_y)
+{
+    return mod_x - mod_y * (mod_x / mod_y);
+}
+
+int srand32(int srand32_seed)
+{
+    kNext = srand32_seed;
+    return 0;
+}
+
+int rand32()
+{
+    int rand32_result;
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = mod(kNext / 65536, 2048);
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = rand32_result * 1024;
+    rand32_result = rand32_result + mod(kNext / 65536, 1024);
+
+    kNext = kNext * 1103515245;
+    kNext = kNext + 12345;
+    rand32_result = rand32_result * 1024;
+    rand32_result = rand32_result + mod(kNext / 65536, 1024);
+
+    return rand32_result;
+}
+
+int main()
+{
+    int n = read();
+    int i = 0;
+
+    // Take advantage of Virtual Machine's randomized stack to provide
+    // random seed. In C this is undefined behaviour and DON'T DO THIS.
+    int seed[1];
+    srand32(seed[0]);
+
+    while (i < n)
+    {
+        write(rand32());
+        i = i + 1;
+    }
+
+    return 0;
+}

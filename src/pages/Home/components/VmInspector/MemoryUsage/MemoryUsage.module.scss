@@ -1,0 +1,31 @@
+.divMemoryUsageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divUsageBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+    font-size: 13px;
+
+    label{
+        user-select: none;
+    }
+
+    label[class="percentageUsage"] {
+        font-weight: bold;
+    }
+
+    span {
+        font-family: "Roboto Mono", monospace;
+    }
+}
+
+.progress{
+    margin: 0;
+}
