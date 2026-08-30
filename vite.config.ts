@@ -4,7 +4,7 @@ import tsconfigpaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: "/ir-virtual-machine",
+    base: "/IR-VM/",
     build: {
         outDir: "./docs"
     },
