@@ -55,11 +55,11 @@ export function registerIr(monaco: Monaco) {
                 [/;.*/, "comment"],
                 [/@whitespace/, "white"],
                 [
-                    /(FUNCTION)(@whitespace)(@identifier)/,
+                    /(function)(@whitespace)(@identifier)/,
                     ["keyword", "white", "function"]
                 ],
                 [
-                    /(CALL)(@whitespace)(@identifier)/,
+                    /(call)(@whitespace)(@identifier)/,
                     ["keyword", "white", "function"]
                 ],
                 [
@@ -76,18 +76,18 @@ export function registerIr(monaco: Monaco) {
     });
 
     const irKeywordSnippetParts = [
-        "FUNCTION ${1:id} :",
-        "DEC ${1:id} ${2:size}",
-        "GLOBAL_DEC ${1:id} ${2:size}",
-        "LABEL ${1:id} :",
-        "GOTO ${1:label}",
-        "IF ${1:condition} GOTO ${2:label}",
-        "ARG ${1:value}",
-        "PARAM ${1:id}",
-        "CALL ${1:id}",
-        "RETURN ${1:value}",
-        "READ ${1:id}",
-        "WRITE ${1:value}"
+        "function ${1:id} :",
+        "dec ${1:id} ${2:size}",
+        "global_dec ${1:id} ${2:size}",
+        "label ${1:id} :",
+        "goto ${1:label}",
+        "if ${1:condition} goto ${2:label}",
+        "arg ${1:value}",
+        "param ${1:id}",
+        "call ${1:id}",
+        "return ${1:value}",
+        "read ${1:id}",
+        "write ${1:value}"
     ];
 
     monaco.languages.registerCompletionItemProvider(irLanguageId, {
@@ -137,7 +137,7 @@ export function registerIr(monaco: Monaco) {
 
                 if (
                     line.match(
-                        `^FUNCTION${irWhiteSpacePattern}` +
+                        `^function${irWhiteSpacePattern}` +
                             `${PATTERN_PIECE_ID}${irWhiteSpacePattern}:$`
                     )
                 ) {
@@ -153,7 +153,7 @@ export function registerIr(monaco: Monaco) {
                     functionLineNumber = i + 1;
                 } else if (
                     line.match(
-                        `^RETURN${irWhiteSpacePattern}` +
+                        `^return${irWhiteSpacePattern}` +
                             `((#${PATTERN_PIECE_IMM})|(${PATTERN_PIECE_ID})|` +
                             `(\\*${PATTERN_PIECE_ID})|` +
                             `(&${PATTERN_PIECE_ID}))$`

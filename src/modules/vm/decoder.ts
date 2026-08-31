@@ -209,18 +209,18 @@ export type DecodedExecutableInstruction = Omit<DecodedInstruction, "type"> & {
 type DecodedInstructionNoMeta = Omit<DecodedInstruction, "lineNumber">;
 
 export const IR_KEYWORDS = [
-    "FUNCTION",
-    "DEC",
-    "GLOBAL_DEC",
-    "LABEL",
-    "GOTO",
-    "IF",
-    "ARG",
-    "PARAM",
-    "CALL",
-    "RETURN",
-    "READ",
-    "WRITE"
+    "function",
+    "dec",
+    "global_dec",
+    "label",
+    "goto",
+    "if",
+    "arg",
+    "param",
+    "call",
+    "return",
+    "read",
+    "write"
 ];
 
 const IR_KEYWORD_SET = new Set<string>(IR_KEYWORDS);
@@ -242,14 +242,14 @@ export class Decoder {
 
     private readonly patternSingular = new RegExp(
         `^(#(?<imm>${PATTERN_PIECE_IMM}))$|` +
-            `^(?<id>${PATTERN_PIECE_ID})$|` +
-            `^(\\*(?<derefId>${PATTERN_PIECE_ID}))$|` +
-            `^(&(?<addressId>${PATTERN_PIECE_ID}))$`
+        `^(?<id>${PATTERN_PIECE_ID})$|` +
+        `^(\\*(?<derefId>${PATTERN_PIECE_ID}))$|` +
+        `^(&(?<addressId>${PATTERN_PIECE_ID}))$`
     );
 
     private readonly patternLValue = new RegExp(
         `^((?<id>${PATTERN_PIECE_ID}))$|` +
-            `^(\\*(?<derefId>${PATTERN_PIECE_ID}))$`
+        `^(\\*(?<derefId>${PATTERN_PIECE_ID}))$`
     );
 
     private readonly illegalInstructionFormatError: DecodedInstructionNoMeta = {
@@ -940,29 +940,29 @@ export class Decoder {
         }
 
         switch (splitResult[0]) {
-            case "FUNCTION":
+            case "function":
                 return this.decodeFunction(splitResult);
-            case "DEC":
+            case "dec":
                 return this.decodeDec(splitResult);
-            case "GLOBAL_DEC":
+            case "global_dec":
                 return this.decodeGlobalDec(splitResult);
-            case "LABEL":
+            case "label":
                 return this.decodeLabel(splitResult);
-            case "GOTO":
+            case "goto":
                 return this.decodeGoto(splitResult);
-            case "IF":
+            case "if":
                 return this.decodeIf(splitResult);
-            case "ARG":
+            case "arg":
                 return this.decodeArg(splitResult);
-            case "CALL":
+            case "call":
                 return this.decodeCall(splitResult);
-            case "PARAM":
+            case "param":
                 return this.decodeParam(splitResult);
-            case "RETURN":
+            case "return":
                 return this.decodeReturn(splitResult);
-            case "READ":
+            case "read":
                 return this.decodeRead(splitResult);
-            case "WRITE":
+            case "write":
                 return this.decodeWrite(splitResult);
             default: {
                 const assign = this.decodeAssign(splitResult);
