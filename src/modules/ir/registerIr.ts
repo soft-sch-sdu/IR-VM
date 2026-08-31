@@ -20,35 +20,23 @@ export function registerIr(monaco: Monaco) {
         id: irLanguageId
     });
 
-    // 修改主题：为 ARG 添加淡化颜色
     monaco.editor.defineTheme("ir-theme", {
         base: "vs",
         inherit: true,
         rules: [
-            {
-                token: "function",
-                foreground: "#74531f"
-            },
-            {
-                token: "number.size",
-                foreground: "#0097ff"
-            },
-            // 新增：淡化 ARG 关键字和操作数（接近背景色）
-            {
-                token: "arg.keyword",
-                foreground: "#e0e0e0"
-            },
-            {
-                token: "arg.operand",
-                foreground: "#e0e0e0"
-            }
+            { token: "function", foreground: "#74531f" },
+            { token: "number.size", foreground: "#0097ff" },
+            // 淡化 ARG 关键字和操作数（之前已添加）
+            { token: "arg.keyword", foreground: "#e0e0e0" },
+            { token: "arg.operand", foreground: "#e0e0e0" },
+            // 新增：淡化立即数（#数字）
+            { token: "number.imm", foreground: "#e0e0e0" }
         ],
         colors: {}
     });
 
     const irWhiteSpacePattern = "[ \\t\\r\\n]+";
 
-    // 修改 Monarch 语法：添加 ARG 特殊规则和 arg-state
     monaco.languages.setMonarchTokensProvider(irLanguageId, {
         keywords: IR_KEYWORDS,
         identifier: PATTERN_PIECE_ID,
@@ -56,7 +44,8 @@ export function registerIr(monaco: Monaco) {
         defaultToken: "source",
         tokenizer: {
             root: [
-                [`#${PATTERN_PIECE_IMM}`, "number"],
+                // 修改：将立即数标记为 number.imm
+                [`#${PATTERN_PIECE_IMM}`, "number.imm"],
                 [PATTERN_PIECE_SIZE, "number.size"],
                 [
                     /(=)|(\+)|(-)|(\*)|(\/)|(==)|(!=)|(<=)|(<)|(>=)|(>)|(&)/,
@@ -73,7 +62,7 @@ export function registerIr(monaco: Monaco) {
                     /(call)(@whitespace)(@identifier)/,
                     ["keyword", "white", "function"]
                 ],
-                // 新增：匹配 ARG 指令（小写），切换到 arg-state
+                // ARG 淡化规则（已存在）
                 [
                     /(arg)(@whitespace)/,
                     ["arg.keyword", "white", { token: "@pop", next: "@arg-state" }]
@@ -88,7 +77,6 @@ export function registerIr(monaco: Monaco) {
                     }
                 ]
             ],
-            // 新增 arg-state 状态：匹配操作数（支持 #、*、& 和标识符/数字）
             "arg-state": [
                 [
                     /(?:#|-?)?\S+/,
