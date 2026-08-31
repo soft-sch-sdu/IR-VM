@@ -20,6 +20,7 @@ export function registerIr(monaco: Monaco) {
         id: irLanguageId
     });
 
+    // 修改主题：为 ARG 添加淡化颜色
     monaco.editor.defineTheme("ir-theme", {
         base: "vs",
         inherit: true,
@@ -31,6 +32,15 @@ export function registerIr(monaco: Monaco) {
             {
                 token: "number.size",
                 foreground: "#0097ff"
+            },
+            // 新增：淡化 ARG 关键字和操作数（接近背景色）
+            {
+                token: "arg.keyword",
+                foreground: "#e0e0e0"
+            },
+            {
+                token: "arg.operand",
+                foreground: "#e0e0e0"
             }
         ],
         colors: {}
@@ -38,6 +48,7 @@ export function registerIr(monaco: Monaco) {
 
     const irWhiteSpacePattern = "[ \\t\\r\\n]+";
 
+    // 修改 Monarch 语法：添加 ARG 特殊规则和 arg-state
     monaco.languages.setMonarchTokensProvider(irLanguageId, {
         keywords: IR_KEYWORDS,
         identifier: PATTERN_PIECE_ID,
@@ -48,7 +59,7 @@ export function registerIr(monaco: Monaco) {
                 [`#${PATTERN_PIECE_IMM}`, "number"],
                 [PATTERN_PIECE_SIZE, "number.size"],
                 [
-                    /(:=)|(\+)|(-)|(\*)|(\/)|(==)|(!=)|(<=)|(<)|(>=)|(>)|(&)/,
+                    /(=)|(\+)|(-)|(\*)|(\/)|(==)|(!=)|(<=)|(<)|(>=)|(>)|(&)/,
                     "operators"
                 ],
                 [/:/, "delimiter"],
@@ -62,6 +73,11 @@ export function registerIr(monaco: Monaco) {
                     /(call)(@whitespace)(@identifier)/,
                     ["keyword", "white", "function"]
                 ],
+                // 新增：匹配 ARG 指令（小写），切换到 arg-state
+                [
+                    /(arg)(@whitespace)/,
+                    ["arg.keyword", "white", { token: "@pop", next: "@arg-state" }]
+                ],
                 [
                     /@identifier/,
                     {
@@ -71,6 +87,14 @@ export function registerIr(monaco: Monaco) {
                         }
                     }
                 ]
+            ],
+            // 新增 arg-state 状态：匹配操作数（支持 #、*、& 和标识符/数字）
+            "arg-state": [
+                [
+                    /(?:#|-?)?\S+/,
+                    { token: "arg.operand", next: "@pop" }
+                ],
+                [/@whitespace/, "white", "@pop"]
             ]
         }
     });

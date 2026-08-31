@@ -395,7 +395,7 @@ export class Decoder {
     private decodeAssign(splitResult: string[]): DecodedInstructionNoMeta {
         if (
             (splitResult.length !== 3 && splitResult.length !== 5) ||
-            splitResult[1] !== ":="
+            splitResult[1] !== "="
         ) {
             return this.illegalInstructionFormatError;
         }
@@ -772,7 +772,7 @@ export class Decoder {
     private decodeAssignCall(splitResult: string[]): DecodedInstructionNoMeta {
         if (
             splitResult.length !== 4 ||
-            splitResult[1] !== ":=" ||
+            splitResult[1] !== "=" ||
             splitResult[2] !== "CALL"
         ) {
             return this.illegalInstructionFormatError;
